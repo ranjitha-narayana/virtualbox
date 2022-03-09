@@ -1,0 +1,141 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Student  API."
+  version: "3.1.2"
+  title: "Student API"
+  contact:
+    email: "ranjitha_narayana@thbs.com"
+host: "localhost:9474"
+basePath: "/stdapi/s1/"
+schemes:
+- "http"
+consumes:
+  - application/json
+  - application/xml
+produces:
+  - application/json
+  - application/xml
+paths:
+  /students:
+    get:
+      tags:
+      - "student"
+      summary: "Get All Students"
+      operationId: "getAllStds"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+    post:
+      tags:
+      - "student"
+      summary: "Add new student Details"
+      operationId: "addNewStd"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "student object"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Studnet"
+        400:
+          description: "Error Occured. "
+  /student/{stdID}:
+    get:
+      tags:
+      - "student"
+      summary: "Get Student Details of given  student ID"
+      operationId: "getStdByID"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "stdID"
+        type: "integer"
+        description: "Student ID "
+        required: true
+      responses:
+        404:
+          description: "Student  not found"
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Student"
+    # put:
+    #   tags:
+    #   - "student"
+    #   summary: "Updates a flight data"
+    #   operationId: "updateFlight"
+    #   consumes:
+    #   - "application/json"
+    #   produces:
+    #   - "application/json"
+    #   parameters:
+    #   - name: "flightID"
+    #     in: "path"
+    #     description: "ID of flight that needs to be updated"
+    #     required: true
+    #     type: "integer"
+    #     format: "int64"
+    #   - name: "body"
+    #     in: "body"
+    #     description: "Updated Flight Data"
+    #     required: true
+    #     schema:
+    #       $ref: "#/definitions/Flight"
+    #   responses:
+    #     200:
+    #       description: "Successfully Updated"
+    #       schema:
+    #         $ref: "#/definitions/Flight"
+    #     400:
+    #       description: "Flight Id does not exists"
+    # delete:
+    #   tags:
+    #   - "flight"
+    #   summary: "Deletes a Flight"
+    #   operationId: "deleteFlight"
+    #   produces:
+    #   - "text/plain"
+    #   parameters:
+    #   - name: "flightID"
+    #     in: "path"
+    #     description: "Flight id to delete"
+    #     required: true
+    #     type: "integer"
+    #     format: "int64"
+    #   responses:
+    #     200:
+    #       description: "Flight deleted successfully"
+    #     400:
+    #       description: "Invalid Flight ID"
+
+
+definitions:
+  Flight:
+    type: "object"
+    properties:
+      flightId:
+        type: "integer"
+        format: "int64"
+      airlineName:
+        type: "string"
+      flightCapacity:
+        type: "integer"
+        format: "int64"
