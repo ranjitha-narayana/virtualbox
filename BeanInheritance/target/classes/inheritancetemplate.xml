@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="baseBookBean" abstract="true">
+        <property name="publisher" value="IBH" />
+    </bean>
+    <bean id="myBookBean" parent="baseBookBean"
+          class="com.test.beans.Book">
+        <property name="BookId" value="3331" />
+        <property name="Bookname" value="Cpp" />
+    </bean>
+</beans>
